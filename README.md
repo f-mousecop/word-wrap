@@ -1,6 +1,6 @@
 # word-wrap
 <a href="https://github.com/davidmoten/word-wrap/actions/workflows/ci.yml"><img src="https://github.com/davidmoten/word-wrap/actions/workflows/ci.yml/badge.svg"/></a><br/>
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.davidmoten/word-wrap/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/com.github.davidmoten/word-wrap)<br/>
+[![Maven Central](https://maven-badges.sml.io/sonatype-central/com.github.davidmoten/word-wrap/badge.svg?style=flat)](https://maven-badges.sml.io/sonatype-central/com.github.davidmoten/word-wrap)<br/>
 [![codecov](https://codecov.io/gh/davidmoten/word-wrap/branch/master/graph/badge.svg)](https://codecov.io/gh/davidmoten/word-wrap)
 
 Java library for wrapping text.
