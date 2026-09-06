@@ -1,0 +1,13 @@
+---
+config:
+    theme: redux-dark
+    look: neo
+---
+flowchart TD
+    A((Give WordWrap \n some text)) --> B[Create a builder]
+    B --> C{{Configure how wrapping should work}}
+    C --> D["Call wrap()"] --> E[/Read characters one at a time/]
+    E --> F[Build words and lines]
+    F --> G{Break lines/words when maxWidth is exceeded}
+    G --> H[/"Return/write the result"/]
+    H --> I([End])

@@ -2,21 +2,12 @@
 
 ## High-level overview of ```WordWrap()```
 
-```mermaid
----
-config:
-    theme: redux-dark
-    look: neo
----
-flowchart TD
-    A((Give WordWrap \n some text)) --> B[Create a builder]
-    B --> C{{Configure how wrapping should work}}
-    C --> D["Call wrap()"] --> E[/Read characters one at a time/]
-    E --> F[Build words and lines]
-    F --> G{Break lines/words when maxWidth is exceeded}
-    G --> H[/"Return/write the result"/]
-    H --> I([End])
-```
+<p align="center">
+    <img src="docs/images/wordwrap-flowchart.svg" alt="WordWrap Flowchart" width="300"/>
+</p>
+
+[View Mermaid source](docs/diagrams/wordwrap-flowchart.mmd)
+
 
 ## 1. The outer ```WordWrap``` class
 
