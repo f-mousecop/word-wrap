@@ -3,10 +3,10 @@
 ## High-level overview of ```WordWrap()```
 
 <p align="center">
-    <img src="docs/images/wordwrap-flowchart.svg" alt="WordWrap Flowchart" width="300"/>
+    <img src="images/wordwrap-flowchart.svg" alt="WordWrap Flowchart" width="300"/>
 </p>
 
-[View Mermaid source](docs/diagrams/wordwrap-flowchart.mmd)
+[View Mermaid source](diagrams/wordwrap-flowchart.mmd)
 
 
 ## 1. The outer ```WordWrap``` class
@@ -44,7 +44,7 @@ Intentional as this class is being used as a util/factory class. Instead of crea
 WordWrap.from("hello world");
 ```
 
-The author's test suite verifies that ```WordWrap``` behaves as a utility class [WordWrapTest](/src/test/java/org/davidmoten/text/utils/WordWrapTest.java)
+The author's test suite verifies that ```WordWrap``` behaves as a utility class [WordWrapTest](/org/davidmoten/text/utils/WordWrapTest.java)
 
 ## 2. The constants at the top
 
@@ -155,7 +155,7 @@ Default definition of "width" is simply:
 ```width = number of characters```
 
 **Important** - because the API lets users replace that calculation with their own function. The existing 
-tests demonstrate that feature with a lambda that doubles each character's effective width. [WordWrapTest](/src/test/java/org/davidmoten/text/utils/WordWrapTest.java)
+tests demonstrate that feature with a lambda that doubles each character's effective width. [WordWrapTest](/org/davidmoten/text/utils/WordWrapTest.java)
 
 ## 5. ```PUNCTUATION```
 
@@ -302,7 +302,7 @@ then write:
 WordWrap.from("hello world")
 ```
 
-the string gets converted into a `Reader`, then a `Builder` is returned. [WordWrap](src/main/java/org/davidmoten/text/utils/WordWrap.java)
+the string gets converted into a `Reader`, then a `Builder` is returned. [WordWrap](../src/main/java/org/davidmoten/text/utils/WordWrap.java)
 
 Can meaningfully ignore most of the plumbing and think:
 
@@ -366,7 +366,7 @@ the ```try/catch``` means:
 > Try to open the file. If the file doesn't exist, convert Java's `FileNotFoundException` into the library's
 > `IORuntimeException`
 
-The existing tests exercise both successful file reading and the missing file exception [WordWrapTest](/src/test/java/org/davidmoten/text/utils/WordWrapTest.java)
+The existing tests exercise both successful file reading and the missing file exception [WordWrapTest](/org/davidmoten/text/utils/WordWrapTest.java)
 
 ## 13. Internal ```from(Reader, boolean)```
 
