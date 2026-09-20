@@ -24,8 +24,5 @@ public class MainTry {
                 .maxWidth(4)
                 .insertHyphens(true)
                 .wrap());
-
-        System.out.println("Hello");
-
     }
 }
