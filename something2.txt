@@ -1,0 +1,8 @@
+If the plugin
+uses the
+filename
+extension to
+decide the
+format, that
+should produce
+an SVG.

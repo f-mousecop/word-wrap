@@ -105,4 +105,16 @@ public class WordWrapJUnit5Test {
                         .maxWidth(-1)
         );
     }
+
+    /**
+     * Boundary test involving extra whitespace
+     */
+    @Test
+    void willTrimExtraWhiteSpaceAndWrapWhenExceedsMaxWidth() {
+        String input = "cat      dog";
+        String actual = WordWrap.from(input)
+                .maxWidth(7)
+                .wrap();
+        assertEquals("cat\ndog", actual);
+    }
 }
