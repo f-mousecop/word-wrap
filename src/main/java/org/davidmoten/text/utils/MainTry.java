@@ -14,9 +14,9 @@ public class MainTry {
         System.out.println(txt);
 
         // trying reading from file and outputting wrapped text to different file
-        WordWrap.from(new File("something.txt"), StandardCharsets.UTF_8)
+        /*WordWrap.from(new File("something.txt"), StandardCharsets.UTF_8)
                 .maxWidth(15)
-                .wrapUtf8("something2.txt");
+                .wrapUtf8("something2.txt");*/
 
         // checking hyphens are being inserted correctly
         System.out.println();
