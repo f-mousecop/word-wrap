@@ -117,4 +117,42 @@ public class WordWrapJUnit5Test {
                 .wrap();
         assertEquals("cat\ndog", actual);
     }
+
+    @Test
+    void willTrimExtraWhiteSpaceBeforeWord() {
+        StringBuilder2 input = new StringBuilder2("         cat");
+        WordWrap.leftTrim(input);
+        assertEquals("cat", input.toString());
+    }
+
+    @Test
+    void willTrimExtraWhiteSpaceBeforeWord1() {
+        StringBuilder2 input = new StringBuilder2(" cat");
+        WordWrap.leftTrim(input);
+        assertEquals("cat", input.toString());
+    }
+
+    @Test
+    void willTrimExtraWhiteSpaceBeforeWord2() {
+        StringBuilder2 input = new StringBuilder2("cat");
+        WordWrap.leftTrim(input);
+        assertEquals("cat", input.toString());
+    }
+
+    @Test
+    void willTrimExtraWhiteSpaceBeforeWord3() {
+        StringBuilder2 input = new StringBuilder2("");
+        WordWrap.leftTrim(input);
+        assertEquals("", input.toString());
+    }
+
+    @Test
+    void breaksLongWordsWithHyphens() {
+        String input = "elephant";
+        String actual = WordWrap.from(input)
+                .maxWidth(4)
+                .insertHyphens(true)
+                .wrap();
+        assertEquals("ele-\npha-\nnt", actual);
+    }
 }
