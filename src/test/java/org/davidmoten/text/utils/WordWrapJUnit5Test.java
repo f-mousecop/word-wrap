@@ -118,6 +118,12 @@ public class WordWrapJUnit5Test {
         assertEquals("cat\ndog", actual);
     }
 
+    /**
+     * =======================================================================
+     * leftTrim tests (similar to preexisting JUnit4 suite - just for reference
+     * =======================================================================
+     **/
+
     @Test
     void willTrimExtraWhiteSpaceBeforeWord() {
         StringBuilder2 input = new StringBuilder2("         cat");
@@ -146,6 +152,21 @@ public class WordWrapJUnit5Test {
         assertEquals("", input.toString());
     }
 
+
+    /**
+     * =======================================================================
+     * Tests exercising relevant paths in the writeBrokenWord CFG and DU chains
+     * =======================================================================
+     **/
+
+
+    /**
+     * DU chains:
+     * D602(insertHyphens) -> U606(insertHyphens)
+     * D607(x) -> U608(x)
+     * <p>
+     * No data-flow anomaly expected: <code>x</code> is assigned before being used to write the substring
+     */
     @Test
     void breaksLongWordsWithHyphens() {
         String input = "elephant";
@@ -154,5 +175,90 @@ public class WordWrapJUnit5Test {
                 .insertHyphens(true)
                 .wrap();
         assertEquals("ele-\npha-\nnt", actual);
+    }
+
+    /**
+     * DU chains:
+     * D602(insertHyphens) -> U606(insertHyphens)
+     * D613(prefix) -> U614(prefix)
+     * D613(prefix) -> U615(prefix)
+     * <p>
+     *
+     * No data-flow anomaly expected: prefix is initialized before being checked
+     * and written to the output
+     */
+    @Test
+    void breaksLongWordWithoutHyphens() {
+        String input = "elephant";
+        String actual = WordWrap.from(input)
+                .maxWidth(4)
+                .insertHyphens(false)
+                .wrap();
+        assertEquals("elep\nhant", actual);
+    }
+
+
+    /**
+     * DU chains:
+     * D602(word) -> U606(word)
+     * D613(prefix) -> U614(prefix)
+     * D613(prefix) -> U615(prefix)
+     * <p>
+     * No data-flow anomaly expected: prefix is defined before use
+     */
+    @Test
+    void skipsHyphenInsertWhenWordIsTooShort() {
+        String input = "cat";
+        String actual = WordWrap.from(input)
+                .maxWidth(1)
+                .insertHyphens(true)
+                .wrap();
+        assertEquals("c\na\nt", actual);
+    }
+
+
+    /**
+     * DU chains:
+     * D607(x) -> No subsequent use on this path
+     * D613(prefix) -> U614(prefix)
+     * D613(prefix) -> U615(prefix)
+     * <p>
+     * Uses extraWordChars(" ") to treat spaces as word characters,
+     * allowing the third condition to evaluate to false.
+     * Verifies that the fallback branch writes a non-whitespace prefix.
+     * <p>
+     * No use-before-definition anomaly expected. x is assigned but
+     * not used because the hyphen-insertion condition is false
+     */
+    @Test
+    void skipsHyphenWhenPrefixStartsWithWhitespace() {
+        String actual = WordWrap.from("  ab")
+                .maxWidth(3)
+                .extraWordChars(" ")
+                .insertHyphens(true)
+                .wrap();
+        assertEquals("  a\nb", actual);
+    }
+
+    /**
+     * DU chains:
+     * D607(x) -> No subsequent use on this path
+     * D613(prefix) -> U614(prefix)
+     * <p>
+     * Uses extraWordChars(" ") to produce a whitespace-only prefix.
+     * Verifies that the prefix is not written when it contains
+     * only whitespace, while the newline is still generated.
+     * <p>
+     * No use-before-definition anomaly expected. Both x and prefix
+     * are assigned, but neither is written to the output on this path
+     */
+    @Test
+    void skipsWhiteSpaceOnlyPrefix() {
+        String actual = WordWrap.from("   a")
+                .maxWidth(3)
+                .extraWordChars(" ")
+                .insertHyphens(true)
+                .wrap();
+        assertEquals("\na", actual);
     }
 }

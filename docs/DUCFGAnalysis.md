@@ -35,6 +35,10 @@ private static void writeBrokenWord(LineConsumer out, StringBuilder2 word, boole
 
 - Compound condition involving `&&`, `if/else`, and a nested `else` condition
 
+### CFG
+
+![CFG](images/word-wrap-writeBrokenWordCFG.drawio.png)
+
 ## DU Analysis 
 
 **Map the following variables for the DU chain**: 
@@ -45,6 +49,4 @@ private static void writeBrokenWord(LineConsumer out, StringBuilder2 word, boole
 
 ### Table
 
-| Variable | Definition (D) | Use (U)  | DU Chain           | Anomaly Type          |
-|----------|----------------|----------|--------------------|-----------------------|
-| `x`      | Line 605       | Line 608 | D605(x) -> U608(x) | None                  |
+![Table](images/dutable.png)
