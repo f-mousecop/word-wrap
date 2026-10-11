@@ -133,6 +133,37 @@ To run benchmarks
 ```bash
 mvn clean install -P benchmark
 ```
+---
+
+## Testing and Continuous Integration
+
+The repository includes an existing JUnit 4 test suite, supplemented by additional JUnit 5 tests in `WordWrapJUnit5Test.java`. The additional tests apply black-box and white-box testing techniques, including boundary value analysis, equivalence partitioning, control-flow path testing, and definition-use (DU) analysis.
+
+[![Maven CI](https://github.com/f-mousecop/word-wrap/actions/workflows/maven.yml/badge.svg)](https://github.com/f-mousecop/word-wrap/actions/workflows/maven.yml)
+
+### Running Tests
+
+Execute the test suite locally using Maven:
+
+`mvn test`
+
+### Code Coverage
+
+JaCoCo is used to measure instruction and branch coverage. Following report generation, the HTML report can be viewed at:
+
+`target/site/jacoco/index.html`
+
+The additional tests include focused white-box testing of the `writeBrokenWord()` method, which achieved 100% instruction and branch coverage in the final local JaCoCo analysis.
+
+### Continuous Integration
+
+GitHub Actions is used to automate the Maven build and test process. The workflow executes the project's test suite to help identify regressions when qualifying repository changes are made.
+
+The workflow configuration is located in `.github/workflows/maven.yml`.
+
+Workflow execution results can be viewed in the repository's **Actions** tab.
+
+---
 
 ## Build
 Use maven:
